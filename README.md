@@ -2,7 +2,7 @@
 
 ## 👋 About Me
 
-Hi, I'm **Kowandaa** (GitHub: [@kowandaa-collab](https://github.com/kowandaa-collab)) — a Computer Science student with hands-on experience in C++, Python, and web development. My work ranges from data structures and algorithms to image processing and database engines.
+Hi, I'm **Alvin** (GitHub: [@kowandaa-collab](https://github.com/kowandaa-collab)) — Informatics student in YZU with hands-on experience in C++, Python, and web development. My work ranges from data structures and algorithms to image processing and database engines.
 
 ---
 
@@ -46,7 +46,6 @@ Visit the site here: **[https://kowandaa-collab.github.io](https://kowandaa-coll
 | [11402_CS351](https://github.com/kowandaa-collab/11402_CS351) | CS351 coursework — Data Structures & Algorithms | — |
 | [11402_CS351_Project0](https://github.com/kowandaa-collab/11402_CS351_Project0) | CS351 Project 0 | C++ |
 | [11402_CS351_ProjectB](https://github.com/kowandaa-collab/11402_CS351_ProjectB) | CSV Mini Database & Query Engine | — |
-| [image-deblurring](https://github.com/kowandaa-collab/image-deblurring) | Image deblurring using Python | Python |
 
 ---
 
