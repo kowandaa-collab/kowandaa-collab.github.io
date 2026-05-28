@@ -1,135 +1,215 @@
+const SVG = {
+  code: `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  tree: `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="20" r="2"/><circle cx="19" cy="20" r="2"/><line x1="12" y1="6" x2="12" y2="13"/><line x1="12" y1="13" x2="5" y2="18"/><line x1="12" y1="13" x2="19" y2="18"/></svg>`,
+  db:   `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 9v5c0 1.66 4 3 9 3s9-1.34 9-3V9"/><path d="M3 14v4c0 1.66 4 3 9 3s9-1.34 9-3v-4"/></svg>`,
+  img:  `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
+};
+
 const projects = [
   {
-    name: "11402_CS351",
+    name: "CS351 Coursework",
     url:  "https://github.com/kowandaa-collab/11402_CS351",
-    desc: "CS351 coursework — Data Structures & Algorithms",
-    lang: null,
+    desc: "Data Structures & Algorithms coursework — implementations, exercises, and problem sets from CS351.",
+    type: "Coursework",
+    year: "2024",
+    techs: ["C++"],
+    banner: "linear-gradient(135deg, #6070ff 0%, #a78bfa 100%)",
+    icon: SVG.code,
   },
   {
-    name: "11402_CS351_Project0",
+    name: "CS351 Project 0",
     url:  "https://github.com/kowandaa-collab/11402_CS351_Project0",
-    desc: "CS351 Project 0",
-    lang: "C++",
+    desc: "Foundational data structures implementation — first major project for CS351.",
+    type: "Project",
+    year: "2024",
+    techs: ["C++"],
+    banner: "linear-gradient(135deg, #3b82f6 0%, #6070ff 100%)",
+    icon: SVG.tree,
   },
   {
-    name: "11402_CS351_ProjectB",
+    name: "CSV Mini Database",
     url:  "https://github.com/kowandaa-collab/11402_CS351_ProjectB",
-    desc: "CSV Mini Database & Query Engine",
-    lang: null,
+    desc: "A CSV-based mini database and query engine built from scratch with custom indexing and querying.",
+    type: "Project",
+    year: "2024",
+    techs: ["C++"],
+    banner: "linear-gradient(135deg, #0891b2 0%, #3b82f6 100%)",
+    icon: SVG.db,
   },
   {
-    name: "image-deblurring",
+    name: "Image Deblurring",
     url:  "https://github.com/kowandaa-collab/image-deblurring",
-    desc: "Image deblurring pipeline using Python",
-    lang: "Python",
+    desc: "Image deblurring pipeline using Python and image processing techniques to restore clarity from blurred inputs.",
+    type: "Project",
+    year: "2024",
+    techs: ["Python"],
+    banner: "linear-gradient(135deg, #059669 0%, #0891b2 100%)",
+    icon: SVG.img,
   },
 ];
 
 const skillGroups = [
-  {
-    label: "Languages",
-    skills: ["C++", "Python", "JavaScript", "HTML5", "CSS3", "SQL"],
-  },
-  {
-    label: "Concepts",
-    skills: ["Data Structures", "Algorithms", "Image Processing"],
-  },
-  {
-    label: "Tools",
-    skills: ["Git", "GitHub Pages"],
-  },
+  { label: "Languages",  skills: ["C++", "Python", "JavaScript", "HTML5", "CSS3", "SQL"] },
+  { label: "Concepts",   skills: ["Data Structures", "Algorithms", "Image Processing"] },
+  { label: "Tools",      skills: ["Git", "GitHub Pages"] },
 ];
 
-/* ── Render projects ── */
-const grid = document.getElementById("projects-container");
+/* ── Render project cards ── */
+const container = document.getElementById("projects-container");
+
 projects.forEach((p, i) => {
   const card = document.createElement("div");
-  card.className = "project-card";
-  card.style.transitionDelay = `${i * 80}ms`;
+  card.className = "project fade-in";
+  card.dataset.delay = String((i % 2) + 1);
   card.innerHTML = `
-    <div class="project-card-header">
-      <svg class="project-folder" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <a href="${p.url}" target="_blank" rel="noopener">${p.name}</a>
+    <div class="project-banner" style="background:${p.banner};">
+      <div class="banner-dots"></div>
+      <div class="banner-icon-wrap">${p.icon}</div>
+      <div class="banner-bottom">
+        <span class="banner-index">0${i + 1}</span>
+        <span class="banner-tag">${p.techs[0]}</span>
+      </div>
     </div>
-    <p>${p.desc}</p>
-    ${p.lang ? `<span class="project-lang"><span class="lang-dot"></span>${p.lang}</span>` : ""}
+    <div class="project-body">
+      <div class="project-meta">
+        <span class="project-type-badge">${p.type}</span>
+        <span class="project-year">${p.year}</span>
+      </div>
+      <h3 class="project-title">${p.name}</h3>
+      <p class="project-description">${p.desc}</p>
+      <div class="project-footer">
+        <ul class="project-languages">
+          ${p.techs.map(t => `<li class="language">${t}</li>`).join("")}
+        </ul>
+        <button class="project-cta">
+          See Project
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
   `;
-  grid.appendChild(card);
+  card.querySelector(".project-cta").addEventListener("click", () => openPopup(p));
+  container.appendChild(card);
 });
 
-/* ── Render skills by group ── */
-const sc = document.getElementById("skills-container");
-skillGroups.forEach(group => {
-  const groupEl = document.createElement("div");
-  groupEl.className = "skill-group";
-  const label = document.createElement("p");
-  label.className = "skill-group-label";
-  label.textContent = group.label;
-  const list = document.createElement("div");
-  list.className = "skills-list";
-  group.skills.forEach(s => {
-    const pill = document.createElement("span");
-    pill.className = "skill-pill";
-    pill.textContent = s;
-    list.appendChild(pill);
+/* ── Popup ── */
+const popupOverlay = document.getElementById("popup-overlay");
+const popupBg      = document.getElementById("popup-bg");
+const popupName    = document.getElementById("popup-name");
+const popupMeta    = document.getElementById("popup-meta-row");
+const popupDesc    = document.getElementById("popup-description");
+const popupLangs   = document.getElementById("popup-langs");
+const popupLink    = document.getElementById("popup-source-link");
+
+function openPopup(p) {
+  popupName.textContent = p.name;
+  popupMeta.innerHTML = `<span>${p.type}</span><span>${p.year}</span>`;
+  popupDesc.textContent = p.desc;
+  popupLangs.innerHTML = p.techs.map(t => `<li class="language">${t}</li>`).join("");
+  popupLink.href = p.url;
+  popupOverlay.classList.add("active");
+  popupBg.classList.add("active");
+  document.body.classList.add("nav-open");
+}
+
+function closePopup() {
+  popupOverlay.classList.remove("active");
+  popupBg.classList.remove("active");
+  document.body.classList.remove("nav-open");
+}
+
+document.querySelector(".close-btn").addEventListener("click", closePopup);
+popupBg.addEventListener("click", closePopup);
+document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePopup(); });
+
+/* ── Skills accordion ── */
+const skillsList = document.getElementById("skills-list");
+
+skillGroups.forEach((group, i) => {
+  const item = document.createElement("li");
+  item.className = "skill-item" + (i === 0 ? " open" : "");
+  item.innerHTML = `
+    <div class="skill-header">
+      ${group.label}
+      <span class="skill-chevron">&#8964;</span>
+    </div>
+    <div class="skill-body">
+      ${group.skills.map(s => `<span class="skill-pill">${s}</span>`).join("")}
+    </div>
+  `;
+  item.querySelector(".skill-header").addEventListener("click", () => {
+    item.classList.toggle("open");
   });
-  groupEl.appendChild(label);
-  groupEl.appendChild(list);
-  sc.appendChild(groupEl);
+  skillsList.appendChild(item);
 });
 
-/* ── Intersection observer (scroll-in animations) ── */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, { threshold: 0.1 });
+/* ── Mobile nav ── */
+const hamburger = document.getElementById("hamburger");
+const mobileNav = document.getElementById("mobile-navbar");
 
-document.querySelectorAll(".fade-section").forEach(el => io.observe(el));
-document.querySelectorAll(".project-card").forEach(el => io.observe(el));
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  mobileNav.classList.toggle("active");
+  document.body.classList.toggle("nav-open");
+});
 
-/* ── Typed text in hero ── */
-const phrases = [" 👋", " — a builder.", " — a CS student.", " — a problem solver."];
-let pi = 0, ci = 0, deleting = false;
-const typedEl = document.getElementById("typed-text");
+document.querySelectorAll(".mobile-nav-link a").forEach(link => {
+  link.addEventListener("click", () => {
+    hamburger.classList.remove("active");
+    mobileNav.classList.remove("active");
+    document.body.classList.remove("nav-open");
+  });
+});
 
-function type() {
-  const current = phrases[pi];
-  if (!deleting) {
-    typedEl.textContent = current.slice(0, ++ci);
-    if (ci === current.length) { deleting = true; setTimeout(type, 1800); return; }
-  } else {
-    typedEl.textContent = current.slice(0, --ci);
-    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+/* ── Contact form ── */
+const form       = document.getElementById("contact-form");
+const emailInput = document.getElementById("email");
+const emailErr   = document.getElementById("email-error-msg");
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const val = emailInput.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    emailInput.classList.add("invalid");
+    emailErr.textContent = "Please enter a valid email address.";
+    return;
   }
-  setTimeout(type, deleting ? 45 : 90);
-}
-setTimeout(type, 1200);
-
-/* ── Theme toggle ── */
-const html = document.documentElement;
-const tBtn = document.getElementById("themeToggle");
-applyTheme(localStorage.getItem("theme") || "dark");
-
-tBtn.addEventListener("click", () => {
-  const next = html.dataset.theme === "dark" ? "light" : "dark";
-  applyTheme(next);
-  localStorage.setItem("theme", next);
+  emailInput.classList.remove("invalid");
+  emailErr.textContent = "";
+  const name = encodeURIComponent(document.getElementById("name").value);
+  const msg  = encodeURIComponent(document.getElementById("message").value);
+  window.location.href = `mailto:kowandaa@gmail.com?subject=Portfolio Contact&body=Name: ${name}%0AEmail: ${encodeURIComponent(val)}%0A%0A${msg}`;
 });
 
-function applyTheme(t) {
-  html.dataset.theme = t;
-  tBtn.textContent = t === "dark" ? "☀ Light" : "☾ Dark";
-}
+emailInput.addEventListener("input", () => {
+  emailInput.classList.remove("invalid");
+  emailErr.textContent = "";
+});
 
-/* ── Active nav link on scroll ── */
-const navLinks = document.querySelectorAll(".nav-links a");
+/* ── Scroll-in animations ── */
+const fadeIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add("visible");
+      fadeIO.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll(".fade-in").forEach(el => fadeIO.observe(el));
+
+/* ── Active nav on scroll ── */
+const navLinks = document.querySelectorAll(".nav-link a");
+const sections = ["about-myself", "works", "form-section"].map(id => document.getElementById(id));
+
 const navIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       navLinks.forEach(a => a.style.color = "");
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (active) active.style.color = "var(--text)";
+      const active = document.querySelector(`.nav-link a[href="#${e.target.id}"]`);
+      if (active) active.style.color = "var(--primary)";
     }
   });
 }, { rootMargin: "-40% 0px -50% 0px" });
 
-document.querySelectorAll("section[id]").forEach(s => navIO.observe(s));
+sections.forEach(s => { if (s) navIO.observe(s); });

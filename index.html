@@ -1,125 +1,155 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kowandaa | Portfolio</title>
+  <title>Alvin | Portfolio</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <!-- ── Navigation ── -->
-  <nav>
-    <a href="#hero" class="nav-logo">&lt;Kowandaa /&gt;</a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
+  <!-- Navigation -->
+  <header>
+    <a href="#headline" id="logo">Alvin</a>
+    <div id="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <ul id="nav-menu">
+      <li class="nav-link"><a href="#about-myself">About</a></li>
+      <li class="nav-link"><a href="#works">Portfolio</a></li>
+      <li class="nav-link"><a href="#form-section">Contact</a></li>
     </ul>
-    <button class="theme-btn" id="themeToggle" title="Toggle theme">☀ Light</button>
-  </nav>
+  </header>
 
-  <!-- ── Hero ── -->
-  <section id="hero">
-    <div class="hero-content">
-      <div class="hero-badge"><span class="hero-badge-dot"></span>Open to opportunities</div>
-      <p class="hero-tag">Informatics Student &amp; Developer</p>
-      <h1 class="hero-name">Hi, I'm <span class="name-highlight">Alvin</span><span id="typed-text"></span><span class="cursor"></span></h1>
-      <p class="hero-sub">Building things with C++, Python, and the web — from data structures and algorithms to image processing and database engines.</p>
-      <div class="hero-btns">
-        <a href="#projects" class="btn btn-primary">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          View Projects
-        </a>
-        <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="btn btn-secondary">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2.04c-3.2.7-3.87-1.54-3.87-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.79 1.07.79 2.15v3.19c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="code-card">
-        <div class="code-header">
-          <div class="code-dots">
-            <span class="dot dot-red"></span>
-            <span class="dot dot-yellow"></span>
-            <span class="dot dot-green"></span>
-          </div>
-          <span class="code-filename">developer.cpp</span>
-        </div>
-        <pre class="code-body"><span class="c-cm">// about me</span>
-<span class="c-kw">struct</span> <span class="c-fn">Developer</span> {
-  string name   = <span class="c-str">"Alvin"</span>;
-  string role   = <span class="c-str">"Informatics Student"</span>;
-  vector&lt;string&gt; langs = {
-    <span class="c-str">"C++"</span>, <span class="c-str">"Python"</span>,
-    <span class="c-str">"JavaScript"</span>
-  };
-  <span class="c-kw">bool</span> openToWork = <span class="c-kw">true</span>;
-};</pre>
-      </div>
-    </div>
-  </section>
+  <!-- Mobile Nav Overlay -->
+  <div id="mobile-navbar">
+    <ul id="mobile-nav-menu">
+      <li class="mobile-nav-link"><a href="#about-myself">About</a></li>
+      <li class="mobile-nav-link"><a href="#works">Portfolio</a></li>
+      <li class="mobile-nav-link"><a href="#form-section">Contact</a></li>
+    </ul>
+  </div>
 
-  <!-- ── About ── -->
-  <section id="about" class="fade-section">
-    <p class="section-label">Who I am</p>
-    <h2 class="section-title">About Me</h2>
-    <div class="about-layout">
-      <div class="about-bio">
-        <p>Informatics student with hands-on experience in C++, Python, and web development. I enjoy solving algorithmic problems and building systems from scratch — from low-level data structures to practical tools with real-world impact.</p>
-        <p>This site is hosted on GitHub Pages and serves as a portfolio, a hub for my projects, and a playground for front-end experimentation.</p>
+  <!-- Hero -->
+  <section id="headline">
+    <div id="headline-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Open to opportunities
       </div>
-      <div class="about-cards">
-        <div class="about-card">
-          <span class="about-card-icon">🔧</span>
-          <h3>What I Build</h3>
-          <p>Data structures &amp; algorithms, CSV database engines, image deblurring pipelines, and web experiments.</p>
-        </div>
-        <div class="about-card">
-          <span class="about-card-icon">📖</span>
-          <h3>Currently</h3>
-          <p>Deepening systems programming knowledge and exploring how algorithms power real-world applications.</p>
+      <h1 class="hero-heading">Hi, I'm <span class="name-gradient">Alvin</span>.<br/>Glad to see you!</h1>
+      <p class="portfolio-description">Informatics student passionate about building systems from scratch — data structures, algorithms, image processing, and web development.</p>
+      <p class="lets-connect">LET'S CONNECT</p>
+      <ul class="social-media-links">
+        <li>
+          <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="social-media-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2.04c-3.2.7-3.87-1.54-3.87-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.79 1.07.79 2.15v3.19c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kowandaa@gmail.com" class="social-media-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero-deco" aria-hidden="true">
+      <div class="deco-ring deco-ring-1"></div>
+      <div class="deco-ring deco-ring-2"></div>
+      <div class="deco-card">
+        <div class="deco-bracket">{ }</div>
+        <p class="deco-name">Alvin</p>
+        <p class="deco-role">Informatics Student</p>
+        <div class="deco-stats">
+          <div class="deco-stat"><span class="stat-num">4</span><span class="stat-lbl">Projects</span></div>
+          <div class="deco-stat"><span class="stat-num">3</span><span class="stat-lbl">Languages</span></div>
         </div>
       </div>
+      <span class="deco-chip chip-1">C++</span>
+      <span class="deco-chip chip-2">Python</span>
+      <span class="deco-chip chip-3">JavaScript</span>
     </div>
   </section>
 
-  <!-- ── Skills ── -->
-  <section id="skills" class="fade-section">
-    <p class="section-label">Tech stack</p>
-    <h2 class="section-title">Skills</h2>
-    <div id="skills-container"></div>
-  </section>
+  <!-- About (now first) -->
+  <div id="about-myself">
+    <div id="intro">
+      <p class="section-label">Who I am</p>
+      <h2 class="section-heading">About Me</h2>
+      <p class="portfolio-description">Informatics student with hands-on experience in C++, Python, and web development. I enjoy solving algorithmic problems and building systems from the ground up.</p>
+      <p class="portfolio-description">This site is hosted on GitHub Pages — a portfolio, a hub for my projects, and a playground for front-end experimentation.</p>
+      <p class="lets-connect">LET'S CONNECT</p>
+      <ul class="social-media-links">
+        <li>
+          <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="social-media-link" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2.04c-3.2.7-3.87-1.54-3.87-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.79 1.07.79 2.15v3.19c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:kowandaa@gmail.com" class="social-media-link" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </li>
+      </ul>
+      <a href="mailto:kowandaa@gmail.com" class="enabled-btn" style="margin-top:28px;display:inline-flex;">Get In Touch</a>
+    </div>
+    <div id="skills-wrapper">
+      <ul id="skills-list"></ul>
+    </div>
+  </div>
 
-  <!-- ── Projects ── -->
-  <section id="projects" class="fade-section">
-    <p class="section-label">Work</p>
-    <h2 class="section-title">Projects</h2>
-    <div class="projects-grid" id="projects-container"></div>
-  </section>
-
-  <!-- ── Contact ── -->
-  <section id="contact" class="fade-section">
-    <p class="section-label">Get in touch</p>
-    <h2 class="section-title">Contact</h2>
-    <p class="contact-sub">Feel free to reach out — always happy to chat about code, CS, or collaboration.</p>
-    <div class="contact-links">
-      <a class="contact-link" href="mailto:kowandaa@gmail.com">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        kowandaa@gmail.com
-      </a>
-      <a class="contact-link" href="https://github.com/kowandaa-collab" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2.04c-3.2.7-3.87-1.54-3.87-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.79 1.07.79 2.15v3.19c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
-        github.com/kowandaa-collab
+  <!-- Works / Portfolio (now second) -->
+  <section id="works">
+    <p class="section-label">What I've built</p>
+    <div class="section-header-row">
+      <h2 class="section-heading">Portfolio</h2>
+      <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="view-all-link">
+        View all on GitHub
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
+    <p class="section-intro">A selection of projects I've built — from data structures and algorithms to image processing pipelines.</p>
+    <div id="projects-container"></div>
   </section>
 
-  <!-- ── Footer ── -->
+  <!-- Project Popup -->
+  <div id="popup-overlay">
+    <div id="popup-bg"></div>
+    <div id="popup-content">
+      <div id="popup-title">
+        <h2 id="popup-name"></h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <p id="popup-meta-row"></p>
+      <p id="popup-description"></p>
+      <ul id="popup-langs" class="project-languages"></ul>
+      <div id="popup-buttons">
+        <a id="popup-source-link" class="enabled-btn" target="_blank" rel="noopener">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Form -->
+  <section id="form-section">
+    <h2 class="contact-header">Contact Me</h2>
+    <p class="contact-description">Feel free to reach out — always happy to chat about code, CS, or collaboration.</p>
+    <form id="contact-form" novalidate>
+      <input type="text" id="name" class="form-input" placeholder="Name" required />
+      <input type="email" id="email" class="form-input" placeholder="Email" required />
+      <p id="email-error-msg"></p>
+      <textarea id="message" class="form-input" placeholder="Message" required></textarea>
+      <button type="submit" id="submit-button">Get In Touch</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>Designed &amp; built by Alvin &nbsp;·&nbsp; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
+    <p>Designed &amp; built by <strong>Alvin</strong> &nbsp;·&nbsp; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
   </footer>
 
   <script src="assets/js/script.js"></script>
