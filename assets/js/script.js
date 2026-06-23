@@ -51,7 +51,7 @@ const projects = [
 const skillGroups = [
   { label: "Languages",  skills: ["C++", "Python", "JavaScript", "HTML5", "CSS3", "SQL"] },
   { label: "Concepts",   skills: ["Data Structures", "Algorithms", "Image Processing"] },
-  { label: "Tools",      skills: ["Git", "GitHub Pages"] },
+  { label: "Tools",      skills: ["Git", "GitHub Pages", "Visual Studio Code", "Jira"] },
 ];
 
 /* ── Render project cards ── */
