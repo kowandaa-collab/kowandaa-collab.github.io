@@ -205,11 +205,83 @@ const sections = ["about-myself", "works", "form-section"].map(id => document.ge
 const navIO = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      navLinks.forEach(a => a.style.color = "");
+      navLinks.forEach(a => a.classList.remove("active"));
       const active = document.querySelector(`.nav-link a[href="#${e.target.id}"]`);
-      if (active) active.style.color = "var(--primary)";
+      if (active) active.classList.add("active");
     }
   });
 }, { rootMargin: "-40% 0px -50% 0px" });
 
 sections.forEach(s => { if (s) navIO.observe(s); });
+
+/* ── Footer year ── */
+const yearEl = document.getElementById("footer-year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* ── Typewriter ── */
+const phrases = [
+  "Glad to see you!",
+  "I build algorithms.",
+  "I write clean code.",
+  "I love data structures.",
+  "I craft web interfaces.",
+];
+let phraseIdx = 0, charIdx = 0, isDeleting = false;
+const tw = document.querySelector(".typewriter");
+if (tw) {
+  (function twTick() {
+    const phrase = phrases[phraseIdx];
+    tw.textContent = isDeleting ? phrase.slice(0, --charIdx) : phrase.slice(0, ++charIdx);
+    let delay = isDeleting ? 45 : 85;
+    if (!isDeleting && charIdx === phrase.length)      { delay = 2200; isDeleting = true; }
+    else if (isDeleting && charIdx === 0)              { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; delay = 350; }
+    setTimeout(twTick, delay);
+  })();
+}
+
+/* ── Scroll progress bar ── */
+const progressBar = document.getElementById("progress-bar");
+window.addEventListener("scroll", () => {
+  if (!progressBar) return;
+  const scrollTop = document.documentElement.scrollTop;
+  const docH      = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  progressBar.style.width = (docH > 0 ? (scrollTop / docH) * 100 : 0) + "%";
+}, { passive: true });
+
+/* ── Back to top ── */
+const backTop = document.getElementById("back-top");
+if (backTop) {
+  window.addEventListener("scroll", () => {
+    backTop.classList.toggle("visible", window.scrollY > 500);
+  }, { passive: true });
+  backTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+}
+
+/* ── Header scroll shadow ── */
+const headerEl = document.querySelector("header");
+window.addEventListener("scroll", () => {
+  headerEl.classList.toggle("scrolled", window.scrollY > 10);
+}, { passive: true });
+
+/* ── Counter animation for deco stats ── */
+function animateCount(el, target, duration) {
+  const start = performance.now();
+  (function step(ts) {
+    const p = Math.min((ts - start) / duration, 1);
+    el.textContent = Math.round(p * target);
+    if (p < 1) requestAnimationFrame(step);
+  })(performance.now());
+}
+const decoCard = document.querySelector(".deco-card");
+if (decoCard) {
+  const statEls  = Array.from(decoCard.querySelectorAll(".stat-num"));
+  const targets  = statEls.map(el => parseInt(el.textContent, 10));
+  statEls.forEach(el => (el.textContent = "0"));
+  const counterIO = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      statEls.forEach((el, i) => animateCount(el, targets[i], 1200));
+      counterIO.disconnect();
+    }
+  }, { threshold: 0.6 });
+  counterIO.observe(decoCard);
+}

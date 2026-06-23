@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Alvin's portfolio — informatics student passionate about data structures, algorithms, image processing, and web development." />
+  <meta name="theme-color" content="#6070ff" />
   <title>Alvin | Portfolio</title>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
+  <div id="progress-bar"></div>
 
   <!-- Navigation -->
   <header>
@@ -38,7 +42,7 @@
       <div class="hero-badge">
         <span class="badge-dot"></span> Open to opportunities
       </div>
-      <h1 class="hero-heading">Hi, I'm <span class="name-gradient">Alvin</span>.<br/>Glad to see you!</h1>
+      <h1 class="hero-heading">Hi, I'm <span class="name-gradient">Alvin</span>.<br/><span class="typewriter" aria-label="Glad to see you!"></span></h1>
       <p class="portfolio-description">Informatics student passionate about building systems from scratch — data structures, algorithms, image processing, and web development.</p>
       <p class="lets-connect">LET'S CONNECT</p>
       <ul class="social-media-links">
@@ -73,15 +77,15 @@
     </div>
   </section>
 
-  <!-- About (now first) -->
+  <!-- About -->
   <div id="about-myself">
     <div id="intro">
-      <p class="section-label">Who I am</p>
-      <h2 class="section-heading">About Me</h2>
-      <p class="portfolio-description">Informatics student with hands-on experience in C++, Python, and web development. I enjoy solving algorithmic problems and building systems from the ground up.</p>
-      <p class="portfolio-description">This site is hosted on GitHub Pages — a portfolio, a hub for my projects, and a playground for front-end experimentation.</p>
-      <p class="lets-connect">LET'S CONNECT</p>
-      <ul class="social-media-links">
+      <p class="section-label fade-in">Who I am</p>
+      <h2 class="section-heading fade-in" data-delay="1">About Me</h2>
+      <p class="portfolio-description fade-in" data-delay="2">Informatics student with hands-on experience in C++, Python, and web development. I enjoy solving algorithmic problems and building systems from the ground up.</p>
+      <p class="portfolio-description fade-in" data-delay="2">This site is hosted on GitHub Pages — a portfolio, a hub for my projects, and a playground for front-end experimentation.</p>
+      <p class="lets-connect fade-in" data-delay="3">LET'S CONNECT</p>
+      <ul class="social-media-links fade-in" data-delay="3">
         <li>
           <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="social-media-link" aria-label="GitHub">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.95.58.1.79-.25.79-.56v-2.04c-3.2.7-3.87-1.54-3.87-1.54-.52-1.34-1.28-1.7-1.28-1.7-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.98 10.98 0 0 1 5.74 0c2.18-1.49 3.14-1.18 3.14-1.18.63 1.58.23 2.75.11 3.04.74.8 1.18 1.83 1.18 3.08 0 4.41-2.7 5.38-5.27 5.67.42.36.79 1.07.79 2.15v3.19c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
@@ -93,24 +97,24 @@
           </a>
         </li>
       </ul>
-      <a href="mailto:kowandaa@gmail.com" class="enabled-btn" style="margin-top:28px;display:inline-flex;">Get In Touch</a>
+      <a href="mailto:kowandaa@gmail.com" class="enabled-btn fade-in" data-delay="4" style="margin-top:28px;display:inline-flex;">Get In Touch</a>
     </div>
-    <div id="skills-wrapper">
+    <div id="skills-wrapper" class="fade-in" data-delay="2">
       <ul id="skills-list"></ul>
     </div>
   </div>
 
-  <!-- Works / Portfolio (now second) -->
+  <!-- Works / Portfolio -->
   <section id="works">
-    <p class="section-label">What I've built</p>
-    <div class="section-header-row">
+    <p class="section-label fade-in">What I've built</p>
+    <div class="section-header-row fade-in" data-delay="1">
       <h2 class="section-heading">Portfolio</h2>
       <a href="https://github.com/kowandaa-collab" target="_blank" rel="noopener" class="view-all-link">
         View all on GitHub
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
-    <p class="section-intro">A selection of projects I've built — from data structures and algorithms to image processing pipelines.</p>
+    <p class="section-intro fade-in" data-delay="2">A selection of projects I've built — from data structures and algorithms to image processing pipelines.</p>
     <div id="projects-container"></div>
   </section>
 
@@ -136,9 +140,9 @@
 
   <!-- Contact Form -->
   <section id="form-section">
-    <h2 class="contact-header">Contact Me</h2>
-    <p class="contact-description">Feel free to reach out — always happy to chat about code, CS, or collaboration.</p>
-    <form id="contact-form" novalidate>
+    <h2 class="contact-header fade-in">Contact Me</h2>
+    <p class="contact-description fade-in" data-delay="1">Feel free to reach out — always happy to chat about code, CS, or collaboration.</p>
+    <form id="contact-form" class="fade-in" data-delay="2" novalidate>
       <input type="text" id="name" class="form-input" placeholder="Name" required />
       <input type="email" id="email" class="form-input" placeholder="Email" required />
       <p id="email-error-msg"></p>
@@ -149,8 +153,12 @@
 
   <!-- Footer -->
   <footer>
-    <p>Designed &amp; built by <strong>Alvin</strong> &nbsp;·&nbsp; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
+    <p>Designed &amp; built by <strong>Alvin</strong> &nbsp;·&nbsp; <span id="footer-year"></span> &nbsp;·&nbsp; Hosted on <a href="https://pages.github.com" target="_blank" rel="noopener">GitHub Pages</a></p>
   </footer>
+
+  <button id="back-top" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 
   <script src="assets/js/script.js"></script>
 </body>
