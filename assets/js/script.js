@@ -61,6 +61,7 @@ projects.forEach((p, i) => {
   const card = document.createElement("div");
   card.className = "project fade-in";
   card.dataset.delay = String((i % 2) + 1);
+  card.dataset.techs = p.techs.join(",");
   card.innerHTML = `
     <div class="project-banner" style="background:${p.banner};">
       <div class="banner-dots"></div>
@@ -91,6 +92,28 @@ projects.forEach((p, i) => {
   card.querySelector(".project-cta").addEventListener("click", () => openPopup(p));
   container.appendChild(card);
 });
+
+/* ── Tech filter ── */
+const filterBar = document.getElementById("filter-bar");
+if (filterBar) {
+  const allTechs = [...new Set(projects.flatMap(p => p.techs))];
+  ["All", ...allTechs].forEach(label => {
+    const btn = document.createElement("button");
+    btn.className = "filter-btn" + (label === "All" ? " active" : "");
+    btn.textContent = label;
+    btn.dataset.filter = label;
+    btn.addEventListener("click", () => {
+      filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const f = btn.dataset.filter;
+      document.querySelectorAll(".project").forEach(card => {
+        const match = f === "All" || (card.dataset.techs || "").split(",").includes(f);
+        card.style.display = match ? "" : "none";
+      });
+    });
+    filterBar.appendChild(btn);
+  });
+}
 
 /* ── Popup ── */
 const popupOverlay = document.getElementById("popup-overlay");
@@ -349,4 +372,45 @@ if (heroDeco && decoCardEl) {
   heroDeco.addEventListener("mouseleave", () => {
     decoCardEl.style.transform = "translate(-50%,-50%)";
   });
+}
+
+/* ── Cursor glow ── */
+const root = document.documentElement;
+window.addEventListener("mousemove", (e) => {
+  root.style.setProperty("--cx", e.clientX + "px");
+  root.style.setProperty("--cy", e.clientY + "px");
+}, { passive: true });
+
+/* ── Konami code easter egg ── */
+const KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+let konamiIdx = 0;
+document.addEventListener('keydown', (e) => {
+  konamiIdx = e.key === KONAMI[konamiIdx] ? konamiIdx + 1 : (e.key === KONAMI[0] ? 1 : 0);
+  if (konamiIdx === KONAMI.length) {
+    konamiIdx = 0;
+    triggerKonami();
+  }
+});
+
+function triggerKonami() {
+  showToast('🎮 Cheat code activated! You found the easter egg!', 'success');
+  const colors = ['#6070ff','#a78bfa','#38bdf8','#22c55e','#f59e0b','#ec4899','#f97316'];
+  for (let i = 0; i < 70; i++) {
+    const el = document.createElement('div');
+    el.className = 'confetti-piece';
+    const size = 6 + Math.random() * 8;
+    el.style.cssText = [
+      `left:${(Math.random() * 100).toFixed(1)}vw`,
+      `background:${colors[i % colors.length]}`,
+      `width:${size.toFixed(1)}px`,
+      `height:${size.toFixed(1)}px`,
+      `border-radius:${Math.random() > 0.4 ? '50%' : '3px'}`,
+      `--dur:${(1.4 + Math.random() * 1.2).toFixed(2)}s`,
+      `--delay:${(Math.random() * 0.7).toFixed(2)}s`,
+      `--tx:${((Math.random() - 0.5) * 220).toFixed(0)}px`,
+      `--rot:${(Math.random() > 0.5 ? 1 : -1) * (200 + Math.random() * 400).toFixed(0)}deg`,
+    ].join(';');
+    document.body.appendChild(el);
+    el.addEventListener('animationend', () => el.remove(), { once: true });
+  }
 }

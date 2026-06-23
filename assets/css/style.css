@@ -26,22 +26,21 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #e8f0fe;
+  background-color: #eef2ff;
   margin: 0;
   overflow-x: hidden;
   color: var(--text);
 }
 
-/* Fixed background via pseudo-element — GPU composited, no scroll repaint */
+/* Dot-grid overlay — sits above the aurora layer */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: url('../images/hex-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-image: radial-gradient(circle, rgba(96,112,255,0.13) 1.2px, transparent 1.2px);
+  background-size: 26px 26px;
+  pointer-events: none;
 }
 
 /* ── HEADER ─────────────────────────────── */
@@ -214,10 +213,16 @@ body.nav-open { overflow-y: hidden; }
   margin: 0 0 18px;
 }
 .name-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, #a78bfa 100%);
+  background: linear-gradient(90deg, #6070ff 0%, #a78bfa 30%, #38bdf8 55%, #a78bfa 75%, #6070ff 100%);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  animation: nameShimmer 5s linear infinite;
+}
+@keyframes nameShimmer {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 220% center; }
 }
 
 .portfolio-description {
@@ -1110,8 +1115,11 @@ header.scrolled {
   --soft-white:   #1e1b4b;
   --skill-bg:     #263148;
 }
-[data-theme="dark"] body          { background-color: #080e1a; }
-[data-theme="dark"] body::before  { opacity: 0.1; }
+[data-theme="dark"] body          { background-color: #080d14; }
+[data-theme="dark"] body::before  {
+  background-image: radial-gradient(circle, rgba(129,140,248,0.07) 1px, transparent 1px);
+  opacity: 1;
+}
 [data-theme="dark"] header        { background-color: rgba(8,14,26,0.95); }
 [data-theme="dark"] #headline     { background-color: rgba(8,14,26,0.78); }
 [data-theme="dark"] #headline::before {
@@ -1306,3 +1314,219 @@ body, header, #headline, #about-myself, #stats-bar, footer,
   box-shadow: 0 20px 48px rgba(129,140,248,0.25), 0 4px 12px rgba(0,0,0,0.3),
               0 0 0 2px rgba(129,140,248,0.4);
 }
+
+/* ══════════════════════════════════════════
+   AURORA BACKGROUND
+══════════════════════════════════════════ */
+#bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  /* base shifts slowly through light purples/blues */
+  background: linear-gradient(145deg, #f0eeff, #e8f0fe, #edf4ff, #f3eeff, #e8f4ff);
+  background-size: 400% 400%;
+  animation: bgPulse 20s ease infinite;
+}
+[data-theme="dark"] #bg-blobs {
+  background: linear-gradient(145deg, #06040f, #090d1f, #040c18, #080420, #050b14);
+  background-size: 400% 400%;
+}
+
+/* SVG fractal-noise grain — adds tactile depth */
+#bg-blobs::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] #bg-blobs::after {
+  mix-blend-mode: screen;
+  opacity: 0.04;
+}
+
+@keyframes bgPulse {
+  0%,100% { background-position: 0% 50%; }
+  33%      { background-position: 100% 0%; }
+  66%      { background-position: 50% 100%; }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Aurora 1 — wide violet sweep, top-left */
+.blob-1 {
+  width: 1000px; height: 600px;
+  top: -220px; left: -280px;
+  background: radial-gradient(ellipse at 45% 50%,
+    rgba(139,92,246,0.6)  0%,
+    rgba(109,40,217,0.22) 40%,
+    transparent           72%);
+  filter: blur(70px);
+  animation: aurora1 24s ease-in-out infinite alternate;
+}
+
+/* Aurora 2 — deep blue, bottom-right */
+.blob-2 {
+  width: 840px; height: 660px;
+  bottom: -240px; right: -240px;
+  background: radial-gradient(ellipse at 55% 45%,
+    rgba(59,130,246,0.55) 0%,
+    rgba(37,99,235,0.18)  42%,
+    transparent           72%);
+  filter: blur(78px);
+  animation: aurora2 30s ease-in-out infinite alternate;
+}
+
+/* Aurora 3 — cyan streak, center-right */
+.blob-3 {
+  width: 580px; height: 780px;
+  top: 20%; right: -100px;
+  background: radial-gradient(ellipse at 50% 40%,
+    rgba(6,182,212,0.38)  0%,
+    rgba(14,165,233,0.1)  48%,
+    transparent           74%);
+  filter: blur(64px);
+  animation: aurora3 21s ease-in-out infinite alternate-reverse;
+}
+
+/* Aurora 4 — soft violet core, center */
+.blob-4 {
+  width: 560px; height: 560px;
+  top: 45%; left: 32%;
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(167,139,250,0.32) 0%,
+    rgba(139,92,246,0.08)  50%,
+    transparent            74%);
+  filter: blur(92px);
+  animation: aurora4 27s ease-in-out infinite alternate-reverse;
+}
+
+/* dark mode — dimmer, cooler tones */
+[data-theme="dark"] .blob-1 {
+  background: radial-gradient(ellipse at 45% 50%,
+    rgba(99,102,241,0.42)  0%,
+    rgba(79,70,229,0.12)   40%,
+    transparent            72%);
+}
+[data-theme="dark"] .blob-2 {
+  background: radial-gradient(ellipse at 55% 45%,
+    rgba(59,130,246,0.3)   0%,
+    rgba(37,99,235,0.08)   42%,
+    transparent            72%);
+}
+[data-theme="dark"] .blob-3 {
+  background: radial-gradient(ellipse at 50% 40%,
+    rgba(6,182,212,0.17)   0%,
+    rgba(14,165,233,0.04)  48%,
+    transparent            74%);
+}
+[data-theme="dark"] .blob-4 {
+  background: radial-gradient(ellipse at 50% 50%,
+    rgba(129,140,248,0.22) 0%,
+    transparent            70%);
+}
+
+/* Multi-waypoint paths give organic aurora movement */
+@keyframes aurora1 {
+  0%   { transform: translate(0px,    0px)   scale(1)    rotate(0deg);  }
+  30%  { transform: translate(110px,  70px)  scale(1.08) rotate(4deg);  }
+  65%  { transform: translate(60px,   140px) scale(0.96) rotate(-3deg); }
+  100% { transform: translate(175px,  55px)  scale(1.14) rotate(7deg);  }
+}
+@keyframes aurora2 {
+  0%   { transform: translate(0px,     0px)   scale(1)    rotate(0deg);  }
+  35%  { transform: translate(-95px,  -65px)  scale(1.09) rotate(-5deg); }
+  70%  { transform: translate(-145px, -25px)  scale(0.93) rotate(6deg);  }
+  100% { transform: translate(-115px, -120px) scale(1.13) rotate(-9deg); }
+}
+@keyframes aurora3 {
+  0%   { transform: translate(0px,   0px)  scale(1)    rotate(0deg);  }
+  40%  { transform: translate(-55px, 95px) scale(1.11) rotate(10deg); }
+  100% { transform: translate(-95px, 55px) scale(0.91) rotate(-5deg); }
+}
+@keyframes aurora4 {
+  0%   { transform: translate(0px,   0px)  scale(1);    }
+  50%  { transform: translate(-75px, 65px) scale(1.14); }
+  100% { transform: translate(65px, -45px) scale(0.92); }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .blob, #bg-blobs { animation: none; }
+}
+
+/* ── PROJECT FILTER BAR ──────────────────── */
+#filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.filter-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: rgba(255,255,255,0.7);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--soft-white);
+}
+.filter-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 4px 14px rgba(96,112,255,0.3);
+}
+[data-theme="dark"] .filter-btn {
+  background: rgba(30,41,59,0.7);
+}
+
+/* ── KONAMI CONFETTI ─────────────────────── */
+.confetti-piece {
+  position: fixed;
+  top: -14px;
+  pointer-events: none;
+  z-index: 99999;
+  animation: confettiFall var(--dur, 1.5s) ease-in var(--delay, 0s) forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateY(105vh) translateX(var(--tx, 0px)) rotate(var(--rot, 360deg)); opacity: 0; }
+}
+
+/* ── CURSOR GLOW (desktop only) ──────────── */
+#cursor-glow {
+  position: fixed;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96,112,255,0.07) 0%, transparent 65%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  left: var(--cx, -9999px);
+  top:  var(--cy, -9999px);
+  transition: left 0.08s linear, top 0.08s linear;
+}
+[data-theme="dark"] #cursor-glow {
+  background: radial-gradient(circle, rgba(129,140,248,0.1) 0%, transparent 65%);
+}
+@media (hover: none) { #cursor-glow { display: none; } }
