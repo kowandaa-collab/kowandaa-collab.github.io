@@ -6,6 +6,10 @@
   <meta name="description" content="Alvin's portfolio — informatics student passionate about data structures, algorithms, image processing, and web development." />
   <meta name="theme-color" content="#6070ff" />
   <title>Alvin | Portfolio</title>
+  <!-- Anti-flash: apply saved theme before CSS renders -->
+  <script>
+    (function(){var t=localStorage.getItem('theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();
+  </script>
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
@@ -15,16 +19,28 @@
   <!-- Navigation -->
   <header>
     <a href="#headline" id="logo">Alvin</a>
-    <div id="hamburger">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
     <ul id="nav-menu">
       <li class="nav-link"><a href="#about-myself">About</a></li>
       <li class="nav-link"><a href="#works">Portfolio</a></li>
       <li class="nav-link"><a href="#form-section">Contact</a></li>
+      <li class="nav-toggle-li">
+        <button class="theme-btn" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </li>
     </ul>
+    <div id="header-right">
+      <button class="theme-btn" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <div id="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
   </header>
 
   <!-- Mobile Nav Overlay -->
@@ -76,6 +92,29 @@
       <span class="deco-chip chip-3">JavaScript</span>
     </div>
   </section>
+
+  <!-- Stats Bar -->
+  <div id="stats-bar">
+    <div class="sbar-block fade-in" data-delay="1">
+      <span class="sbar-num" data-count="4">0</span>
+      <span class="sbar-label">Projects Built</span>
+    </div>
+    <div class="sbar-sep"></div>
+    <div class="sbar-block fade-in" data-delay="2">
+      <span class="sbar-num" data-count="6">0</span>
+      <span class="sbar-label">Technologies</span>
+    </div>
+    <div class="sbar-sep"></div>
+    <div class="sbar-block fade-in" data-delay="3">
+      <span class="sbar-num" data-count="2" data-suffix="+">0+</span>
+      <span class="sbar-label">Years Coding</span>
+    </div>
+    <div class="sbar-sep"></div>
+    <div class="sbar-block fade-in" data-delay="4">
+      <span class="sbar-num">∞</span>
+      <span class="sbar-label">Passion</span>
+    </div>
+  </div>
 
   <!-- About -->
   <div id="about-myself">
@@ -159,6 +198,8 @@
   <button id="back-top" aria-label="Back to top">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
   </button>
+
+  <div id="toast-container"></div>
 
   <script src="assets/js/script.js"></script>
 </body>

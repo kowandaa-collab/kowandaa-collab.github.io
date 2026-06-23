@@ -172,13 +172,17 @@ form.addEventListener("submit", (e) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
     emailInput.classList.add("invalid");
     emailErr.textContent = "Please enter a valid email address.";
+    showToast("Please enter a valid email.", "error");
     return;
   }
   emailInput.classList.remove("invalid");
   emailErr.textContent = "";
+  showToast("Opening your email client...", "success");
   const name = encodeURIComponent(document.getElementById("name").value);
   const msg  = encodeURIComponent(document.getElementById("message").value);
-  window.location.href = `mailto:kowandaa@gmail.com?subject=Portfolio Contact&body=Name: ${name}%0AEmail: ${encodeURIComponent(val)}%0A%0A${msg}`;
+  setTimeout(() => {
+    window.location.href = `mailto:kowandaa@gmail.com?subject=Portfolio Contact&body=Name: ${name}%0AEmail: ${encodeURIComponent(val)}%0A%0A${msg}`;
+  }, 400);
 });
 
 emailInput.addEventListener("input", () => {
@@ -284,4 +288,65 @@ if (decoCard) {
     }
   }, { threshold: 0.6 });
   counterIO.observe(decoCard);
+}
+
+/* ── Toast ── */
+function showToast(msg, type = "success") {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+  const icon = type === "success" ? "✓" : "!";
+  const t = document.createElement("div");
+  t.className = `toast toast--${type}`;
+  t.innerHTML = `<span class="toast-icon">${icon}</span>${msg}`;
+  container.appendChild(t);
+  requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add("visible")));
+  setTimeout(() => {
+    t.classList.remove("visible");
+    t.addEventListener("transitionend", () => t.remove(), { once: true });
+  }, 3500);
+}
+
+/* ── Dark mode toggle ── */
+document.querySelectorAll(".theme-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+});
+
+/* ── Stats bar counter ── */
+const statsBar = document.getElementById("stats-bar");
+const sbarNums = statsBar ? Array.from(statsBar.querySelectorAll(".sbar-num[data-count]")) : [];
+if (sbarNums.length) {
+  sbarNums.forEach(el => { el.textContent = "0" + (el.dataset.suffix || ""); });
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      sbarNums.forEach(el => {
+        const target = parseInt(el.dataset.count, 10);
+        const suffix = el.dataset.suffix || "";
+        const start  = performance.now();
+        (function step(ts) {
+          const p = Math.min((ts - start) / 1400, 1);
+          el.textContent = Math.round(p * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        })(performance.now());
+      });
+    }
+  }, { threshold: 0.5 }).observe(statsBar);
+}
+
+/* ── 3D card tilt ── */
+const heroDeco   = document.querySelector(".hero-deco");
+const decoCardEl = document.querySelector(".deco-card");
+if (heroDeco && decoCardEl) {
+  heroDeco.addEventListener("mousemove", (e) => {
+    const r = heroDeco.getBoundingClientRect();
+    const x = (e.clientX - r.left)  / r.width  - 0.5;
+    const y = (e.clientY - r.top)   / r.height - 0.5;
+    decoCardEl.style.transform = `translate(-50%,-50%) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
+  });
+  heroDeco.addEventListener("mouseleave", () => {
+    decoCardEl.style.transform = "translate(-50%,-50%)";
+  });
 }
