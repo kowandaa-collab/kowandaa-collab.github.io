@@ -1,8 +1,8 @@
 const SVG = {
-  code: `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
-  tree: `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="20" r="2"/><circle cx="19" cy="20" r="2"/><line x1="12" y1="6" x2="12" y2="13"/><line x1="12" y1="13" x2="5" y2="18"/><line x1="12" y1="13" x2="19" y2="18"/></svg>`,
-  db:   `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 9v5c0 1.66 4 3 9 3s9-1.34 9-3V9"/><path d="M3 14v4c0 1.66 4 3 9 3s9-1.34 9-3v-4"/></svg>`,
-  img:  `<svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
+  code: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+  tree: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="2"/><circle cx="5" cy="20" r="2"/><circle cx="19" cy="20" r="2"/><line x1="12" y1="6" x2="12" y2="13"/><line x1="12" y1="13" x2="5" y2="18"/><line x1="12" y1="13" x2="19" y2="18"/></svg>`,
+  db:   `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 9v5c0 1.66 4 3 9 3s9-1.34 9-3V9"/><path d="M3 14v4c0 1.66 4 3 9 3s9-1.34 9-3v-4"/></svg>`,
+  img:  `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>`,
 };
 
 const projects = [
@@ -63,29 +63,17 @@ projects.forEach((p, i) => {
   card.dataset.delay = String((i % 2) + 1);
   card.dataset.techs = p.techs.join(",");
   card.innerHTML = `
-    <div class="project-banner" style="background:${p.banner};">
-      <div class="banner-dots"></div>
-      <div class="banner-icon-wrap">${p.icon}</div>
-      <div class="banner-bottom">
-        <span class="banner-index">0${i + 1}</span>
-        <span class="banner-tag">${p.techs[0]}</span>
-      </div>
-    </div>
     <div class="project-body">
-      <div class="project-meta">
-        <span class="project-type-badge">${p.type}</span>
-        <span class="project-year">${p.year}</span>
+      <div class="card-top">
+        <span class="card-index">0${i + 1}</span>
+        <span class="card-tech-badge">${p.techs[0]}</span>
       </div>
+      <div class="card-icon">${p.icon}</div>
       <h3 class="project-title">${p.name}</h3>
       <p class="project-description">${p.desc}</p>
       <div class="project-footer">
-        <ul class="project-languages">
-          ${p.techs.map(t => `<li class="language">${t}</li>`).join("")}
-        </ul>
-        <button class="project-cta">
-          See Project
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
+        <span class="card-tech-label">${p.techs.join(", ")}</span>
+        <button class="project-cta">See project &nbsp;→</button>
       </div>
     </div>
   `;
@@ -367,10 +355,10 @@ if (heroDeco && decoCardEl) {
     const r = heroDeco.getBoundingClientRect();
     const x = (e.clientX - r.left)  / r.width  - 0.5;
     const y = (e.clientY - r.top)   / r.height - 0.5;
-    decoCardEl.style.transform = `translate(-50%,-50%) rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
+    decoCardEl.style.transform = `rotateY(${x * 20}deg) rotateX(${-y * 20}deg) scale(1.05)`;
   });
   heroDeco.addEventListener("mouseleave", () => {
-    decoCardEl.style.transform = "translate(-50%,-50%)";
+    decoCardEl.style.transform = "";
   });
 }
 

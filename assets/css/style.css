@@ -278,60 +278,36 @@ body.nav-open { overflow-y: hidden; }
 .hero-deco {
   display: none;
   position: relative;
-  width: 320px;
-  height: 320px;
   flex-shrink: 0;
   margin-right: 60px;
   z-index: 1;
   animation: fadeUp 0.9s ease 0.3s both;
+  perspective: 900px;
 }
-
-.deco-ring {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  border: 2px dashed rgba(96,112,255,0.2);
-}
-.deco-ring-1 {
-  width: 220px;
-  height: 220px;
-  margin: -110px 0 0 -110px;
-  animation: spinCW 22s linear infinite;
-}
-.deco-ring-2 {
-  width: 300px;
-  height: 300px;
-  margin: -150px 0 0 -150px;
-  border-color: rgba(96,112,255,0.1);
-  animation: spinCCW 30s linear infinite;
-}
-
-@keyframes spinCW  { to { transform: rotate(360deg); } }
-@keyframes spinCCW { to { transform: rotate(-360deg); } }
 
 .deco-card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 170px;
+  width: 200px;
   background: var(--white);
-  border-radius: 20px;
-  padding: 24px 20px 20px;
+  border-radius: 24px;
+  padding: 32px 24px 28px;
   text-align: center;
   border: 1px solid var(--border);
-  box-shadow: 0 12px 40px rgba(96,112,255,0.14), 0 2px 8px rgba(0,0,0,0.06);
-  z-index: 2;
+  box-shadow: 0 16px 48px rgba(96,112,255,0.12), 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.deco-bracket {
-  font-size: 28px;
+.deco-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, #a78bfa 100%);
+  color: #fff;
+  font-size: 26px;
   font-weight: 700;
-  color: var(--primary);
-  font-family: 'Courier New', monospace;
-  letter-spacing: -2px;
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 6px 20px rgba(96,112,255,0.3);
 }
 .deco-name {
   font-size: 15px;
@@ -365,23 +341,6 @@ body.nav-open { overflow-y: hidden; }
   letter-spacing: 0.5px;
 }
 
-.deco-chip {
-  position: absolute;
-  background: var(--white);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 5px 13px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--primary);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  z-index: 3;
-  white-space: nowrap;
-  letter-spacing: 0.3px;
-}
-.chip-1 { top: 14px;  left: 50%; transform: translateX(-50%); }
-.chip-2 { bottom: 56px; left: -10px; }
-.chip-3 { bottom: 56px; right: -10px; }
 
 /* ── SECTION LABEL ───────────────────────── */
 .section-label {
@@ -464,57 +423,47 @@ body.nav-open { overflow-y: hidden; }
   transform: translateY(-8px);
 }
 
-/* gradient banner with dot pattern + icon */
-.project-banner {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-}
-.banner-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255,255,255,0.15) 1.5px, transparent 1.5px);
-  background-size: 20px 20px;
-}
-.banner-icon-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  opacity: 0.95;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
-  transition: transform 0.35s ease;
-}
-.project:hover .banner-icon-wrap {
-  transform: translate(-50%, -60%) scale(1.1);
-}
-.banner-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+/* flat card top row */
+.card-top {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
+  margin-bottom: 20px;
 }
-.banner-index {
-  font-size: 56px;
+.card-index {
+  font-size: 20px;
   font-weight: 700;
-  color: rgba(255,255,255,0.15);
+  color: var(--border);
   line-height: 1;
 }
-.banner-tag {
+.card-tech-badge {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 1.5px;
-  color: rgba(255,255,255,0.95);
-  background: rgba(255,255,255,0.2);
-  border: 1px solid rgba(255,255,255,0.35);
-  padding: 5px 14px;
+  color: var(--primary);
+  background: var(--soft-white);
+  border: 1px solid rgba(96,112,255,0.2);
+  padding: 4px 12px;
   border-radius: 20px;
-  backdrop-filter: blur(6px);
+  letter-spacing: 0.3px;
+}
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--soft-white);
+  border: 1px solid rgba(96,112,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  color: var(--primary);
+  transition: background 0.2s ease;
+}
+.project:hover .card-icon { background: rgba(96,112,255,0.1); }
+.card-tech-label {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 500;
 }
 
 .project-body { padding: 22px 24px 24px; }
@@ -591,23 +540,21 @@ body.nav-open { overflow-y: hidden; }
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
-  font-weight: 700;
-  color: var(--white);
-  background: var(--primary);
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
   border: none;
-  border-radius: 10px;
-  padding: 9px 18px;
+  padding: 0;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: all 0.25s ease;
+  gap: 4px;
+  transition: gap 0.2s ease, color 0.2s ease;
   white-space: nowrap;
   flex-shrink: 0;
 }
 .project-cta:hover {
-  background: var(--primary-dark);
-  box-shadow: 0 6px 16px rgba(96,112,255,0.35);
-  transform: translateX(3px);
+  gap: 8px;
+  color: var(--primary-dark);
 }
 
 /* ── BUTTON ──────────────────────────────── */
@@ -1059,9 +1006,9 @@ header.scrolled {
   .portfolio-description { font-size: 17px; max-width: 480px; }
 
   .hero-deco {
-    display: block;
+    display: flex;
+    align-items: center;
     margin-right: 120px;
-    margin-top: 80px;
   }
 
   #works {
@@ -1070,7 +1017,6 @@ header.scrolled {
     margin: 0 auto;
   }
   #projects-container { grid-template-columns: 1fr 1fr; gap: 24px; }
-  .project-banner { height: 220px; }
 
   #about-myself {
     display: flex;
@@ -1094,9 +1040,7 @@ header.scrolled {
 @media only screen and (min-width: 1280px) {
   .hero-heading { font-size: 64px; }
   #headline-content { padding-left: 200px; max-width: 620px; }
-  .hero-deco { margin-right: 160px; width: 360px; height: 360px; }
-  .deco-ring-1 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
-  .deco-ring-2 { width: 340px; height: 340px; margin: -170px 0 0 -170px; }
+  .hero-deco { margin-right: 160px; }
 }
 
 /* ══════════════════════════════════════════
@@ -1129,6 +1073,8 @@ header.scrolled {
 [data-theme="dark"] #stats-bar    { background: rgba(8,14,26,0.9); }
 [data-theme="dark"] footer        { background: rgba(8,14,26,0.95); }
 [data-theme="dark"] .project      { background-color: rgba(20,28,50,0.97); border-color: rgba(51,65,85,0.5); }
+[data-theme="dark"] .card-icon    { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.15); }
+[data-theme="dark"] .card-index   { color: var(--border); }
 [data-theme="dark"] .form-input   { background-color: rgba(30,41,59,0.95); color: var(--heading); }
 [data-theme="dark"] .form-input::placeholder { color: #475569; }
 [data-theme="dark"] #popup-content { background: #111827; }
@@ -1233,26 +1179,8 @@ body, header, #headline, #about-myself, #stats-bar, footer,
   .sbar-block { padding: 0 20px; }
 }
 
-/* ── FLOATING CHIP ANIMATIONS ────────────── */
-.chip-1 { animation: floatA 4s ease-in-out 1.4s infinite; }
-.chip-2 { animation: floatB 5s ease-in-out 2s infinite; }
-.chip-3 { animation: floatC 4.5s ease-in-out 2.6s infinite; }
 
-@keyframes floatA {
-  0%, 100% { transform: translateX(-50%) translateY(0px); }
-  50%       { transform: translateX(-50%) translateY(-8px); }
-}
-@keyframes floatB {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
-@keyframes floatC {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-7px); }
-}
-
-/* ── 3D TILT — deco card perspective ────── */
-.hero-deco { perspective: 900px; }
+/* ── 3D TILT ─────────────────────────────── */
 .deco-card { transition: transform 0.15s ease; }
 
 /* ── MOBILE NAV STAGGER ──────────────────── */
